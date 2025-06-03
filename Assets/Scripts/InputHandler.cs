@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private PlayerMover _mover;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Input.GetKey(KeyCode.D))
+        {
+            _mover.MoveRight();
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            _mover.MoveLeft();
+        }
     }
 }
