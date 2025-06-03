@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InputHandler : MonoBehaviour
@@ -16,6 +14,11 @@ public class InputHandler : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             _mover.MoveLeft();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _mover.Jump();
         }
     }
 }
