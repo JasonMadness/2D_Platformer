@@ -10,6 +10,10 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _speed = 4f;
     [SerializeField] private float _jumpForce = 8f;
 
+    private Vector2 _rightDirection = Vector2.zero;
+    private Vector2 _leftDirection = new(0, 180);
+    private bool _isLookingRight = true;
+
     private float _minGroundDistance = 0.2f;
     private bool _isGrounded = false;
 
@@ -20,11 +24,17 @@ public class PlayerMover : MonoBehaviour
 
     public void MoveRight()
     {
+        if (_isLookingRight == false)
+            transform.rotation = Quaternion.Euler(_rightDirection);
+        
         transform.Translate(Vector2.right * _speed * Time.deltaTime);
     }
 
     public void MoveLeft()
     {
+        if (_isLookingRight)
+            transform.rotation = Quaternion.Euler(_leftDirection);
+        
         transform.Translate(Vector2.left * _speed * Time.deltaTime);
     }
 
