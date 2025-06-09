@@ -14,12 +14,19 @@ public class PlayerMover : MonoBehaviour
     private Vector2 _leftDirection = new(0, 180);
     private bool _isLookingRight = true;
 
-    private float _minGroundDistance = 0.2f;
+    private float _minGroundDistance = 0.1f;
     private bool _isGrounded = false;
+
+    private bool _isRunning;
+    private bool _isJumping;
+    private bool _isFalling;
+
+    public bool IsRunning => _isRunning;
 
     private void Update()
     {
         _isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _minGroundDistance, _groundLayer);
+        _isRunning = _isGrounded && _rigidbody.velocity != Vector2.zero;
     }
 
     public void MoveRight()
@@ -58,6 +65,10 @@ public class PlayerMover : MonoBehaviour
 
     private void Move()
     {
-        transform.Translate(Vector3.right * _speed * Time.deltaTime);
+        //transform.Translate(Vector3.right * _speed * Time.deltaTime);
+        Vector2 moveDirection = _isLookingRight ? Vector2.right : Vector2.left;
+        //_rigidbody.AddForce(moveDirection * _speed * Time.deltaTime);
+        _rigidbody.velocity += (moveDirection * _speed).normalized;
+        Debug.Log(_rigidbody.velocity);
     }
 }

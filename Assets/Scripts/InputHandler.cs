@@ -3,6 +3,7 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour
 {
     [SerializeField] private PlayerMover _mover;
+    [SerializeField] private PlayerAnimator _animator;
 
     private void Update()
     {
@@ -15,6 +16,8 @@ public class InputHandler : MonoBehaviour
         {
             _mover.MoveLeft();
         }
+        
+        _animator.SetRunFlag(_mover.IsRunning);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

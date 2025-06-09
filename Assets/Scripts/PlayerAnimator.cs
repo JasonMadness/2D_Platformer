@@ -1,18 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private const string IsRunning = "IsRunning";
+
+    private Animator _animator;
+    private bool _isRunning;
+
+    private void Awake()
     {
-        
+        _animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+       // _animator
+    }
+
+    public void SetRunFlag(bool flag)
+    {
+        _animator.SetBool(IsRunning, flag);
     }
 }
