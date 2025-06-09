@@ -25,22 +25,39 @@ public class PlayerMover : MonoBehaviour
     public void MoveRight()
     {
         if (_isLookingRight == false)
-            transform.rotation = Quaternion.Euler(_rightDirection);
-        
-        transform.Translate(Vector2.right * _speed * Time.deltaTime);
+            LookRight();
+
+        Move();
     }
 
     public void MoveLeft()
     {
         if (_isLookingRight)
-            transform.rotation = Quaternion.Euler(_leftDirection);
-        
-        transform.Translate(Vector2.left * _speed * Time.deltaTime);
+            LookLeft();
+
+        Move();
     }
 
     public void Jump()
     {
         if (_isGrounded)
             _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+    }
+
+    private void LookRight()
+    {
+        transform.rotation = Quaternion.Euler(_rightDirection);
+        _isLookingRight = true;
+    }
+
+    private void LookLeft()
+    {
+        transform.rotation = Quaternion.Euler(_leftDirection);
+        _isLookingRight = false;
+    }
+
+    private void Move()
+    {
+        transform.Translate(Vector3.right * _speed * Time.deltaTime);
     }
 }
